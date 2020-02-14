@@ -1,0 +1,2 @@
+# Squash
+Squash scoring app

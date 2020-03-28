@@ -1,0 +1,39 @@
+<!-- test.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="./3rdParty/qunit/qunit-2.9.2.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="./3rdParty/qunit/qunit-2.9.2.js"></script>
+</body>
+
+<!-- Reference to all the the data classes. -->
+<script src="./src/data/enums.js"></script>
+<script src="./src/data/player.js"></script>
+<script src="./src/data/score.js"></script>
+<script src="./src/data/serve.js"></script>
+<script src="./src/data/turn.js"></script>
+<script src="./src/data/history.js"></script>
+<script src="./src/data/match.js" ></script>
+<script src="./src/data/model.js "></script>
+
+<!-- Reference to vue. -->
+<script src="./3rdParty/vue/vue.js" ></script>
+
+<!-- Reference to vuex. -->
+<script src="./3rdParty/vuex//vuex.js" ></script>
+
+<!--  -->
+<script src="./src/store/store.js"></script>
+
+<!-- At last, include all the (unit) test files. -->
+<script src="./test/store/testStore.js"></script>
+
+</html>

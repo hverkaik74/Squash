@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> 
+    <head> 
+
+        <!-- Vuetify; UI library for vue. -->
+        <link href="./3rdParty/vuetify/fonts.css" rel="stylesheet">
+        <link href="./3rdParty/vuetify/materialdesignicons.min.css" rel="stylesheet">
+        <link href="./3rdParty/vuetify/vuetify.min.css" rel="stylesheet">
+
+        <link href="./src/css/default.css" rel="stylesheet">
+        
+        <!-- https://fonts.google.com/?category=Monospace -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet"> 
+
+
+        <!--
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"> 
+        -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+
+        <title>Squash</title> 
+    </head> 
+    <body> 
+        <div id="app">
+            <v-container>
+                <vc-players class="root-div" ></vc-players>
+                <vc-space class="root-div" ></vc-space>
+                <vc-info class="root-div"></vc-info>
+                <vc-space class="root-div"></vc-space>
+                <vc-turn class="root-div turn-current" :turn=undefined></vc-turn>
+                <vc-space class="root-div"></vc-space>
+                <vc-history class="root-div" ></vc-history>
+            </v-container>
+        </div>
+    </body> 
+</html> 
+
+<!-- Reference to all the the data classes. -->
+<script src="./src/data/enums.js"></script>
+<script src="./src/data/player.js"></script>
+<script src="./src/data/score.js"></script>
+<script src="./src/data/serve.js"></script>
+<script src="./src/data/turn.js"></script>
+<script src="./src/data/history.js"></script>
+<script src="./src/data/match.js" ></script>
+<script src="./src/data/model.js "></script>
+
+<!-- Reference to all the helper classes. -->
+<script src="./src/helpers/infoTexts.js"></script>
+
+<!-- Reference to vue. -->
+<script src="./3rdParty/vue/vue.js" ></script>
+
+<!-- Reference to vuetify script. Must be referenced after vue.js -->
+<script src="./3rdParty/vuetify/vuetify.js"></script>
+
+<!-- Reference to vuex. -->
+<script src="./3rdParty/vuex//vuex.js" ></script>
+
+<!-- Reference to store. Must be referenced after vuex. -->
+<script src="./src/store/store.js"></script>
+
+<!--Reference to engines. Must be referenced after store. -->
+<script src="./src/engines/par11/par11.js"></script>
+<script src="./src/engines/engines.js" ></script>
+
+<!-- Reference to vue components. -->
+<script src="./src/components/vc-space.js"></script>
+<script src="./src/components/vc-button.js"></script>
+<script src="./src/components/vc-games.js"></script>
+<script src="./src/components/vc-player.js" ></script>
+<script src="./src/components/vc-players.js"></script>
+<script src="./src/components/vc-points.js"></script>
+<script src="./src/components/vc-serve.js"></script>
+<script src="./src/components/vc-turn.js"></script>
+<script src="./src/components/vc-turn-labels.js"></script>
+<script src="./src/components/vc-history.js"></script>
+<script src="./src/components/vc-info.js"></script>
+<script src="./src/components/vc-undo.js"></script>
+
+<!-- Reference to script that starts program. -->
+<script src="./main.js"></script> 
+
+<script>
+    // strict mode enabled.    
+    "use strict";
+
+    // This is executed after page is loaded.    
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let main = new Main();
+        main.start();             
+    })    
+</script>

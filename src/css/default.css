@@ -1,0 +1,87 @@
+/* 
+    default.css 
+*/
+
+.root-div {
+    padding: 8px;
+}
+
+.turn-current {
+    height: 100px;
+    font-weight: bold !important;
+}
+  
+.vc-space {
+    padding-bottom: 16px;
+}
+
+.vc-players {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px; 
+}
+ 
+.vc-player input {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.vc-history {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px; 
+}
+
+.turn-current {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;    
+}
+
+/* */
+.playerA {
+    background-color: coral !important;
+}
+
+/* */
+.playerB {
+    background-color: cornflowerblue !important;
+}
+
+.turn-winner {
+    background-color: green;
+}
+
+.turn-loser {
+    background-color: red;
+}
+
+.turn-history {
+    background-color: burlywood;
+}
+
+.turn-labels-col {
+    padding-bottom: 0px;
+}
+
+.turn-labels-label {
+    text-decoration: underline;
+}
+
+.vc-info {
+    background-color: lightyellow;
+    font-size: x-large;
+}
+
+.info-label {
+    width: 100%;
+}
+
+.vc-info {
+    background-color: lightyellow;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px; 
+}

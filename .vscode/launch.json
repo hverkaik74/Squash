@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "${cwd}/main.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome (TEST)",
+            "url": "${cwd}/test.html",
+            "webRoot": "${workspaceFolder}"
+        }
+
+    ]
+}

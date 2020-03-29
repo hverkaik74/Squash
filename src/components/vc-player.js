@@ -9,7 +9,7 @@ Vue.component(
         
         template: 
             `
-                <v-text-field class="vc-player centered-input" v-model="name" outlined></v-text-field>
+                <v-text-field class="vc-player centered-input" v-model="name" maxlength="16" outlined></v-text-field>
             `,
 
         computed: {

@@ -46,6 +46,10 @@ const store = new Vuex.Store({
 	 */
 	getters: {
 
+		dialogs_undo( state, getters ) {
+			return state.model.dialogs.confirmUndo;
+		},
+
 		info( state, getters ) {
 			return state.model.match.info;
 		},

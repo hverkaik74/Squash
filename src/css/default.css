@@ -2,6 +2,11 @@
     default.css 
 */
 
+.v-card__text
+{
+    font-size: larger !important;
+}
+
 .root-div {
     padding: 8px;
 }

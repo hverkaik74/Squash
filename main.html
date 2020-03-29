@@ -23,7 +23,8 @@
         <title>Squash</title> 
     </head> 
     <body> 
-        <div id="app">
+        <!-- Note: The data-app="true" is needed for the use of v-dialog, otherwise exception is shown. But why? -->
+        <div id="app" data-app="true" >
             <v-container>
                 <vc-players class="root-div" ></vc-players>
                 <vc-space class="root-div" ></vc-space>
@@ -46,6 +47,7 @@
 <script src="./src/data/history.js"></script>
 <script src="./src/data/match.js" ></script>
 <script src="./src/data/model.js "></script>
+<script src="./src/data/dialogs.js"></script>
 
 <!-- Reference to all the helper classes. -->
 <script src="./src/helpers/infoTexts.js"></script>
@@ -79,6 +81,7 @@
 <script src="./src/components/vc-history.js"></script>
 <script src="./src/components/vc-info.js"></script>
 <script src="./src/components/vc-undo.js"></script>
+<script src="./src/components/vc-dialog.js"></script>
 
 <!-- Reference to script that starts program. -->
 <script src="./main.js"></script> 

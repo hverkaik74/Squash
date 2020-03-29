@@ -14,7 +14,7 @@ Vue.component(
                             <vc-turn class="turn-history" :turn=turn></vc-turn>
                         </div>
                     </div>
-                </div>
+                 </div>
             `,
             methods:
             {

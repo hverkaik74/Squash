@@ -1,11 +1,35 @@
 /* 
     default.css 
-*/
 
+    Fonts helper: https://google-webfonts-helper.herokuapp.com/fonts
+
+*/
+   
+/* fira-mono-regular - latin */
+@font-face {
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/fira-mono-v8-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Fira Mono Regular'), local('FiraMono-Regular'),
+         url('./../../3rdParty/font/fira-mono-v8-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./../../3rdParty/font/fira-mono-v8-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./../../3rdParty/font/fira-mono-v8-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./../../3rdParty/font/fira-mono-v8-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./../../3rdParty/font/fira-mono-v8-latin-regular.svg#FiraMono') format('svg'); /* Legacy iOS */
+  }
+
+/* We use only one font for the whole application. */
+body {
+    font-family: "Fira Mono";
+}
+
+/*
 .v-card__text
 {
     font-size: larger !important;
 }
+*/
 
 .root-div {
     padding: 8px;
@@ -27,7 +51,7 @@
 }
  
 .vc-player input {
-    font-family: 'Montserrat', sans-serif;
+    /*font-family: 'Montserrat', sans-serif;*/
     text-align: center;
     font-size: xx-large;
     font-weight: bold;

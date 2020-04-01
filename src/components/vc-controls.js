@@ -20,8 +20,11 @@ Vue.component(
                         <!-- This template is the non-dialog part, always shown on the screen. -->
                         <template v-slot:activator="{ on }">
                             <v-row>
-                                <v-col cols="12" align="center" justify="center" >
+                                <v-col v-if="showStart()" cols="12" align="center" justify="center" >
                                     <v-btn color="primary" dark v-on="on">START NEW MATCH</v-btn>
+                                </v-col>
+                                <v-col v-if="showStop()" cols="12" align="center" justify="center" >
+                                    <v-btn color="primary" dark @click="handleClickStopMatch" >STOP MATCH</v-btn>
                                 </v-col>
                             </v-row>
                         </template>
@@ -71,8 +74,20 @@ Vue.component(
                     this.$store.commit( enumMutations.new_match, undefined );
                 },
 
-                hideDialog: function() {
+                handleClickStopMatch() {
+                    this.$store.commit( enumMutations.match_state, enumMatchState.Idle );
+                },
+
+                hideDialog() {
                     this.show = false;
+                },
+
+                showStart() {
+                    return !Logic.isMatchRunning( this.$store.getters.match );
+                },
+
+                showStop() {
+                    return !this.showStart();
                 }
             },
 

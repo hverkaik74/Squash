@@ -8,21 +8,22 @@ Vue.use(Vuex);
  * All the names of possible mutations on the store instance.
  */
 enumMutations = Object.freeze ( {
+	games: "games",
+	historyAdd: "historyAdd",
+	info: "info",
+	match_state: "match_state",
 	new_match: "new_match",
 	player_name: "player_name",
 	playerA_name: "playerA_name",
-	playerB_name: "playerB_name",
 	playerA_points: "playerA_points",
+	playerB_name: "playerB_name",
 	playerB_points: "playerB_points",
 	points: "points",
-	games: "games",
-	historyAdd: "historyAdd",
+	serve_maySwitch: "serve_maySwitch",
 	serve_player: "serve_player",
 	serve_side: "serve_side",
-	serve_maySwitch: "serve_maySwitch",
-	info: "info",
-	undo: "undo",
 	toss: "toss",
+	undo: "undo",
 } );
 
 enumActions = Object.freeze( {
@@ -79,7 +80,11 @@ const store = new Vuex.Store({
 			return state.model.match.turn.scoreA.points === 0 && state.model.match.turn.scoreB.points === 0;
 		},
 
-		player: ( state, getters ) => ( eplayer ) => {
+		match( state, getters ) {
+			return state.model.match;
+		},
+
+ 		player: ( state, getters ) => ( eplayer ) => {
 			if ( enumPlayer.isPlayerA( eplayer ) ) {
 				return state.model.match.playerA;
 			}
@@ -157,6 +162,11 @@ const store = new Vuex.Store({
 
 		info( state, value ) {
 			state.model.match.info = value;
+		},
+
+		match_state( state, enumMatchState )
+		{
+			state.model.match.state = enumMatchState;
 		},
 
 		new_match( state ) {

@@ -10,7 +10,11 @@ class Par11 {
 	 */
 	constructor( store )
 	{
+		// todo: do were really want the store here?
 		this._store = store;
+
+		this._bestOf = enumBestOf.gamesToWin( this._store.getters.model.match.bestOf )
+
 	}
 
 	/**

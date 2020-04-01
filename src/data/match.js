@@ -8,11 +8,21 @@ class Match
     {
         this._state = enumMatchState.Idle;
         this._toss = enumToss.Automatic;
+        this._bestOf = enumBestOf.Five;
         this._playerA = new Player( enumPlayer.A );
         this._playerB = new Player( enumPlayer.B );
         this._info = InfoTexts.empty;
         this._turn = new Turn();
         this._history = new History();
+    }
+
+    get() {
+        return this._bestOf;
+    }
+
+    set( enumBestOf ) 
+    {
+        this._bestOf = enumBestOf;
     }
 
     get history() {

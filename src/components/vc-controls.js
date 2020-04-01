@@ -47,6 +47,11 @@ Vue.component(
                                         </v-col>
                                     </v-row>
                                     <v-row>
+                                        <v-col>
+                                            <v-select label="Best of X games" :items="bestof_items()" ></v-select>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row>
                                         <v-col cols="12">
                                             <v-switch v-model="toss" label=" Automatic toss."></v-switch>
                                         </v-col>
@@ -65,6 +70,10 @@ Vue.component(
             </div>`,
 
             methods: {
+                bestof_items()
+                {
+                    return enumBestOf.all();
+                },
                 handleClickCancel() {
                     this.hideDialog();
                 },

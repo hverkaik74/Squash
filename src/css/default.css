@@ -20,6 +20,7 @@
   }
 
 /* We use only one font for the whole application. */
+
 body {
     font-family: "Fira Mono";
 }

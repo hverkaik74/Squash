@@ -80,3 +80,26 @@ enumToss = Object.freeze( {
         return false;
     }
 } );
+
+enumBestOf = Object.freeze( {
+
+    One: "One",
+    Three: "Three",
+    Five: "Five",
+
+    all: function() {
+        return [this.One, this.Three, this.Five];
+    },
+
+    gamesToWin: function( eBestOf ) {
+        switch ( eBestOf ) {
+            case enumBestOf.One:
+                return 1;
+            case enumBestOf.Three:
+                return 2;
+            case enumBestOf.Five:
+                return 3;
+        }
+    }
+
+} ); 

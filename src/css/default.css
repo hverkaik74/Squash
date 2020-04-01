@@ -54,6 +54,7 @@ v-btn.color-no {
 .turn-current {
     height: 100px;
     font-weight: bold !important;
+    font-size: larger !important;
 }
   
 .vc-space {

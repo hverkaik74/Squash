@@ -38,12 +38,12 @@ Vue.component(
                                 <v-container>
                                     <v-row>
                                         <v-col cols="12">
-                                            <v-text-field v-model="namePlayerA" label="Name player A (*)" required></v-text-field>
+                                            <v-text-field v-model="namePlayerA" clearable label="Name player A (*)" required></v-text-field>
                                         </v-col>
                                     </v-row>
                                     <v-row>
                                         <v-col cols="12">
-                                            <v-text-field v-model="namePlayerB" label="Name player B (*)" required></v-text-field>
+                                            <v-text-field v-model="namePlayerB" clearable label="Name player B (*)" required></v-text-field>
                                         </v-col>
                                     </v-row>
                                     <v-row>

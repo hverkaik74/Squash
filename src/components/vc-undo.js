@@ -33,11 +33,11 @@ Vue.component(
 
         template: `
             <div class="vc-undo" >
-                <v-dialog v-model="show" persistent width="unset"  >
+                <v-dialog v-model="show" persistent width="unset">
                     <template v-slot:activator="{on}">
                         <v-row>
                             <v-col>
-                                <v-btn block v-on="on" :disabled="!canUndo()">UNDO</v-btn>
+                                <v-btn block v-on="on" :disabled="!canUndo()">UNDO LAST TURN</v-btn>
                             </v-col>
                         </v-row>
                     </template>
@@ -46,35 +46,31 @@ Vue.component(
                         <v-card-text>Are you sure you want to undo the last turn?</v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="clickYes">Yes</v-btn>
-                            <v-btn color="green darken-1" text @click="clickNo">No</v-btn>
+                            <v-btn text class="btn-color-yes" @click="handleClickYes">Yes</v-btn>
+                            <v-btn text class="btn-color-no" @click="handleClickNo">No</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
             </div>`,
         
         methods: {
-            canUndo: function() {
-                let turnPrevious = this.$store.getters.previousTurn;
-                if ( turnPrevious === undefined ) {
-                    return false;
-                }
-                return true;
+            canUndo() {
+                return Logic.canUndo( this.$store.state.model.match );
             },
 
-            clickNo()
+            handleClickNo()
             {
-                this.show = false;
+                this.hideDialog();
             },
 
-            clickYes()
+            handleClickYes()
             {
-                this.show = false;
+                this.hideDialog();
                 this.$store.dispatch( enumActions.undo );
             },
-            
-            maxWidth: function() {
-                return 400;
+
+            hideDialog() {
+                this.show = false;
             }
         }
     }

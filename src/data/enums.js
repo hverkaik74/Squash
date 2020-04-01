@@ -44,3 +44,39 @@ enumSide = Object.freeze( {
         return eside == this.L ? this.R : this.L;
     }
 } );
+
+enumMatchState = Object.freeze( {
+
+    Idle: "Idle",
+    Running: "Running",
+
+    isIdle: function( eMatchState ) {
+        if ( eMatchState === this.Idle ) {
+            return true;
+        }
+        return false;
+    },
+
+    isRunning: function( eMatchState )
+    {
+        if ( eMatchState === this.Running ) {
+            return true;
+        }
+        return false;
+    }
+
+} );
+
+enumToss = Object.freeze( {
+
+    Automatic: "Auto",
+    Manual: "Manual",
+
+    isAutomatic: function( enumToss ) 
+    {
+        if ( enumToss === this.Automatic ) {
+            return true;
+        }
+        return false;
+    }
+} );

@@ -14,7 +14,7 @@ Vue.component(
                         <vc-player eplayer="A" :turn=undefined></vc-player>
                     </v-col>
                     <v-col>
-                        <vc-player eplayer="B"></vc-player>
+                        <vc-player eplayer="B" :turn=undefined></vc-player>
                     </v-col>
                 </v-row>
             </div>`,

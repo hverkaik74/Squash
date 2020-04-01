@@ -138,9 +138,9 @@ class Par11 {
 		let pointsOpponent = this._store.getters.points( opponent );
 		if ( !Par11.isEndOfGame( points, pointsOpponent ) ) {
 			this._store.commit( enumMutations.serve_player, eplayer );
-			let side = Par11.side( this._store.getters.turn, this._store.getters.previousTurn );
+			let side = Par11.side( this._store.getters.turn, this._store.getters.turnPrevious );
 			this._store.commit( enumMutations.serve_side, side );
-			let isHandOut = Par11.isHandOut( this._store.getters.turn, this._store.getters.previousTurn );
+			let isHandOut = Par11.isHandOut( this._store.getters.turn, this._store.getters.turnPrevious );
 			this._store.commit( enumMutations.serve_maySwitch, isHandOut );
 			if ( isHandOut ) {
 				infoTexts.add( "Handout" );

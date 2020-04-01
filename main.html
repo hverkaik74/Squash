@@ -9,7 +9,7 @@
         
         <link href="./src/css/default.css" rel="stylesheet">
         
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes, minimal-ui">
         
         <title>Squash</title> 
     </head> 
@@ -17,6 +17,9 @@
         <!-- Note: The data-app="true" is needed for the use of v-dialog, otherwise exception is shown. But why? -->
         <div id="app" data-app="true" >
             <v-container>
+                <vc-space class="root-div" ></vc-space>
+                <vc-controls class="root-div" ></vc-controls>
+                <vc-space class="root-div" ></vc-space>
                 <vc-players class="root-div" ></vc-players>
                 <vc-space class="root-div" ></vc-space>
                 <vc-info class="root-div"></vc-info>
@@ -24,6 +27,7 @@
                 <vc-turn class="root-div turn-current" :turn=undefined></vc-turn>
                 <vc-space class="root-div"></vc-space>
                 <vc-history class="root-div" ></vc-history>
+                <vc-space class="root-div" ></vc-space>
             </v-container>
         </div>
     </body> 
@@ -42,6 +46,9 @@
 
 <!-- Reference to all the helper classes. -->
 <script src="./src/helpers/infoTexts.js"></script>
+
+<!-- Reference to "all" logic -->
+<script src="./src/logic/logic.js"></script>
 
 <!-- Reference to vue. -->
 <script src="./3rdParty/vue/vue.js" ></script>
@@ -73,6 +80,7 @@
 <script src="./src/components/vc-info.js"></script>
 <script src="./src/components/vc-undo.js"></script>
 <script src="./src/components/vc-dialog.js"></script>
+<script src="./src/components/vc-controls.js"></script>
 
 <!-- Reference to script that starts program. -->
 <script src="./main.js"></script> 

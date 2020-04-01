@@ -8,7 +8,8 @@ Vue.use(Vuex);
  * All the names of possible mutations on the store instance.
  */
 enumMutations = Object.freeze ( {
-    new_match: "new_match",
+	new_match: "new_match",
+	player_name: "player_name",
 	playerA_name: "playerA_name",
 	playerB_name: "playerB_name",
 	playerA_points: "playerA_points",
@@ -21,6 +22,7 @@ enumMutations = Object.freeze ( {
 	serve_maySwitch: "serve_maySwitch",
 	info: "info",
 	undo: "undo",
+	toss: "toss",
 } );
 
 enumActions = Object.freeze( {
@@ -50,8 +52,31 @@ const store = new Vuex.Store({
 			return state.model.dialogs.confirmUndo;
 		},
 
+		games: ( state, getters ) => ( eplayer, turn ) => {
+			
+			turn = turn || state.model.match.turn;
+			return getters.score( eplayer, turn ).games;
+		},
+
+		history( state, getters ) {
+			return state.model.match.history.items;
+		},
+
 		info( state, getters ) {
 			return state.model.match.info;
+		},
+
+		// is niet echt een getter, geeft geen waarde uit datamodel terug.
+		isCurrentTurn: ( state, getters ) => ( turn ) => {
+			if ( state.model.match.turn === turn ) {
+				return true;
+			}
+			return false;
+		},
+
+		isStartOfGame( state, getters ) {
+			// ask engine :-)
+			return state.model.match.turn.scoreA.points === 0 && state.model.match.turn.scoreB.points === 0;
 		},
 
 		player: ( state, getters ) => ( eplayer ) => {
@@ -63,6 +88,14 @@ const store = new Vuex.Store({
 
 		player_name:( state, getters ) => ( eplayer ) => {
 			return getters.player( eplayer ).name;
+		},
+
+		score: ( state, getters ) => ( eplayer, turn ) => {
+			turn = turn || state.model.match.turn;
+			if ( enumPlayer.isPlayerA( eplayer ) ) {
+				return turn.scoreA;
+			}
+			return turn.scoreB;
 		},
 
 		serve( state, getters ) {
@@ -81,48 +114,25 @@ const store = new Vuex.Store({
 			return state.model.match.turn.serve.side;
 		},
 
-		score: ( state, getters ) => ( eplayer, turn ) => {
-			turn = turn || state.model.match.turn;
-			if ( enumPlayer.isPlayerA( eplayer ) ) {
-				return turn.scoreA;
-			}
-			return turn.scoreB;
-		},
-
-		games: ( state, getters ) => ( eplayer, turn ) => {
-			
-			turn = turn || state.model.match.turn;
-			return getters.score( eplayer, turn ).games;
-		},
-	
 		points: ( state, getters ) => ( eplayer, turn ) => {
 			turn = turn || state.model.match.turn;
 			return getters.score( eplayer, turn ).points;
 		},
 	
-		history( state, getters ) {
-			return state.model.match.history.items;
+		toss( state, getters ) 
+		{
+			if ( enumToss.isAutomatic( state.model.match.toss ) ) {
+				return true;
+			}
+			return false;
 		},
 
 		turn: ( state, getters ) => {
 			return state.model.match.turn;
 		},
 
-		previousTurn: ( state, getters ) => {
+		turnPrevious: ( state, getters ) => {
 			return state.model.match.history.items[0];
-		},
-
-		// is niet echt een getter, geeft geen waarde uit datamodel terug.
-		isCurrentTurn: ( state, getters ) => ( turn ) => {
-			if ( state.model.match.turn === turn ) {
-				return true;
-			}
-			return false;
-		},
-
-		isStartOfGame( state, getters ) {
-			// ask engine :-)
-			return state.model.match.turn.scoreA.points === 0 && state.model.match.turn.scoreB.points === 0;
 		}
 	},
 
@@ -131,17 +141,32 @@ const store = new Vuex.Store({
 	 */
 	mutations: {
 		
+		games( state, value ) {
+			if ( enumPlayer.isPlayerA( value.eplayer ) ) {
+				state.model.match.turn.scoreA.games = value.games;
+			} else {
+            	state.model.match.turn.scoreB.games = value.games;
+			}
+		},
+
+		historyAdd( state, turn )
+		{
+			let historyTurn = state.model.match.turn.copy();
+			state.model.match.history.add( historyTurn );
+		},
+
 		info( state, value ) {
 			state.model.match.info = value;
 		},
 
 		new_match( state ) {
+			state.model.match.state = enumMatchState.Running;
 			state.model.match.turn.scoreA.games = 0;
 			state.model.match.turn.scoreA.points = 0;
 			state.model.match.turn.scoreB.games = 0;
 			state.model.match.turn.scoreB.points = 0;
 			state.model.match.turn.serve.player = Par11.toss();
-			state.model.match.history = [];
+			state.model.match.history.items.splice(0,state.model.match.history.items.length );
 		},
 
 		player_name( state, value ) {
@@ -169,6 +194,14 @@ const store = new Vuex.Store({
 			state.model.match.turn.scoreB.points = points;
 		},
 
+		points( state, value ) {
+			if ( enumPlayer.isPlayerA( value.eplayer ) ) {
+				state.model.match.turn.scoreA.points = value.points;
+			} else {
+            	state.model.match.turn.scoreB.points = value.points;
+			}
+		},
+
         serve_maySwitch( state, maySwitch ) {
 			state.model.match.turn.serve.maySwitch = maySwitch;
 		},
@@ -181,26 +214,13 @@ const store = new Vuex.Store({
 			state.model.match.turn.serve.side = eside;
 		},
 
-		games( state, value ) {
-			if ( enumPlayer.isPlayerA( value.eplayer ) ) {
-				state.model.match.turn.scoreA.games = value.games;
-			} else {
-            	state.model.match.turn.scoreB.games = value.games;
-			}
-		},
-
-		points( state, value ) {
-			if ( enumPlayer.isPlayerA( value.eplayer ) ) {
-				state.model.match.turn.scoreA.points = value.points;
-			} else {
-            	state.model.match.turn.scoreB.points = value.points;
-			}
-		},
-
-		historyAdd( state, turn )
+		toss( state, automatic )
 		{
-			let historyTurn = state.model.match.turn.copy();
-			state.model.match.history.add( historyTurn );
+			if ( automatic ) {
+				state.model.match.toss = enumToss.Automatic;
+			} else {
+				state.model.match.toss = enumToss.Manual;
+			}
 		},
 
 		undo( state, value ) {
@@ -211,7 +231,7 @@ const store = new Vuex.Store({
 
 	actions: {
 
-		undo (context) {
+		undo ( context ) {
 			
             if ( context.getters.isStartOfGame ) {
 				context.commit( enumMutations.undo, undefined );

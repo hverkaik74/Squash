@@ -7,7 +7,7 @@ class Player
     constructor( eplayer ) 
     {
         this._eplayer = eplayer;
-        this._name = "<name of player>";
+        this._name = eplayer.toString();
     }
 
     get eplayer() {

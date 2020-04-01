@@ -6,11 +6,17 @@ class Match
 {
     constructor() 
     {
+        this._state = enumMatchState.Idle;
+        this._toss = enumToss.Automatic;
         this._playerA = new Player( enumPlayer.A );
         this._playerB = new Player( enumPlayer.B );
         this._info = InfoTexts.empty;
         this._turn = new Turn();
         this._history = new History();
+    }
+
+    get history() {
+        return this._history;
     }
 
     get info() {
@@ -29,11 +35,23 @@ class Match
         return this._playerB;
     }
 
-    get turn() {
-        return this._turn;
+    get state() {
+        return this._state;
     }
 
-    get history() {
-        return this._history;
+    set state( enumState ) {
+        this._state = enumState;
+    }
+
+    get toss() {
+        return this._toss;
+    }
+ 
+    set toss( enumToss ) {
+        this._toss = enumToss;
+    }
+
+    get turn() {
+        return this._turn;
     }
 }

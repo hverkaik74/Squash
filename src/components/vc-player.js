@@ -1,6 +1,8 @@
 //
 // vc-player.js
 //
+//                 <v-text-field class="vc-player centered-input" :disabled="true"  v-model="name" maxlength="16"></v-text-field>
+
 
 Vue.component(
     'vc-player', 
@@ -9,8 +11,31 @@ Vue.component(
         
         template: 
             `
-                <v-text-field class="vc-player centered-input" v-model="name" maxlength="16" outlined></v-text-field>
+                <v-alert class="vc-player vc-player-alert" 
+                
+                :class="{ 
+                    playerA: isPlayerA(), 
+                    playerB: isPlayerB()
+                    
+                }"
+
+                >{{render()}}</v-alert>
             `,
+
+        methods: {
+
+            isPlayerA: function() {
+                return enumPlayer.isPlayerA( this.eplayer );
+            },
+            isPlayerB: function() {
+                return enumPlayer.isPlayerB( this.eplayer );
+            },
+
+
+            render() {
+                return this.$store.getters.player_name( this.eplayer );
+            }
+        },
 
         computed: {
 
@@ -19,7 +44,7 @@ Vue.component(
                     return this.$store.getters.player_name( this.eplayer );
                 },
                 set( value ) {
-                    this.$store.commit( "player_name", { name: value, eplayer: this.eplayer } );
+                    this.$store.commit( enumMutations.player_name, { name: value, eplayer: this.eplayer } );
                 }
             }
         }

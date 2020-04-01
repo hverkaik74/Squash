@@ -16,14 +16,14 @@ Vue.component(
 
         template: `<v-btn class="vc-button v-btn--depressed"
         
+        :disabled="!isMatchRunning()"
+
         :class="{ 
             'turn-current': isTurnCurrent(),
             playerA: isPlayerA(), 
             playerB: isPlayerB()
             
         }"
-        
-        
 
         v-on:click=handleClick 
 
@@ -34,6 +34,9 @@ Vue.component(
                 if ( this.click !== undefined && this.click !== null ) {
                     this.click();
                 }
+            },
+            isMatchRunning: function() {
+                return Logic.isMatchRunning( this.$store.state.model.match );
             },
             isTurnCurrent: function() {
                 return this.turn === undefined;

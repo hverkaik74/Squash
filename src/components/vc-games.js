@@ -7,7 +7,11 @@ Vue.component(
     {
         props: ['eplayer','turn'],
 
-        template: `<vc-button class="vc-button" :eplayer=this.eplayer :turn=this.turn :render=render></vc-button>`,
+        template: 
+            `
+                <vc-button class="vc-button" :eplayer=this.eplayer :turn=this.turn :render=render>
+                </vc-button>
+            `,
 
         methods: {
             render: function() {

@@ -6,14 +6,19 @@ Vue.component(
     'vc-points', 
     {
         props: ['eplayer','turn'],
+
+        mixins: [mixinTurn],
         
-        template: `<vc-button class="vc-points"  :eplayer=this.eplayer :turn=this.turn :render=render :click=handleClick></vc-button>`,
+        template: 
+            `
+                <vc-button class="vc-points" :eplayer=this.eplayer :turn=this.turn :render=render :click=handleClick>
+                </vc-button>
+            `,
 
         methods: {
             handleClick: function( event )
             {
-                // Suppress clicks in history items.
-                if ( this.turn !== undefined ) {
+               if ( !this.isTurnCurrent() ) {
                     return;
                 }
                 engines.current.handleScore( this.eplayer );

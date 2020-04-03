@@ -7,7 +7,7 @@ class Match
     constructor() 
     {
         this._state = enumMatchState.Idle;
-        this._toss = enumToss.Automatic;
+        this._toss = enumToss.Auto;
         this._bestOf = enumBestOf.Five;
         this._playerA = new Player( enumPlayer.A );
         this._playerB = new Player( enumPlayer.B );
@@ -20,9 +20,9 @@ class Match
         return this._bestOf;
     }
 
-    set bestOf( enumBestOf ) 
+    set bestOf( eBestOf ) 
     {
-        this._bestOf = enumBestOf;
+        this._bestOf = eBestOf;
     }
 
     get history() {
@@ -49,16 +49,16 @@ class Match
         return this._state;
     }
 
-    set state( enumState ) {
-        this._state = enumState;
+    set state( eState ) {
+        this._state = eState;
     }
 
     get toss() {
         return this._toss;
     }
  
-    set toss( enumToss ) {
-        this._toss = enumToss;
+    set toss( eToss ) {
+        this._toss = eToss;
     }
 
     get turn() {

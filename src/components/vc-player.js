@@ -21,7 +21,7 @@ Vue.component(
     {
         props: ['eplayer'],
         
-        mixins: [mixinAll],
+        mixins: [mixinMatch,mixinPlayers],
 
         template: 
             `
@@ -39,22 +39,12 @@ Vue.component(
             `,
 
         methods: {
-
-            isPlayerA: function() {
-                return enumPlayer.isPlayerA( this.eplayer );
-            },
-            isPlayerB: function() {
-                return enumPlayer.isPlayerB( this.eplayer );
-            },
-
-
             render() {
                 return this.$store.getters.player_name( this.eplayer );
             }
         },
 
         computed: {
-
            name: {
                 get() {
                     return this.$store.getters.player_name( this.eplayer );

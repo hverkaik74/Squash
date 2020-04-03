@@ -7,23 +7,30 @@ Vue.component(
     {
         props: ['eplayer','turn'],
 
-        template: `<vc-button class="vc-serve" :eplayer=this.eplayer :turn=this.turn :render=render :click=handleClick></vc-button>`,
+        mixins: [mixinTurn],
+
+        template: 
+            `
+                <vc-button class="vc-serve" :eplayer=this.eplayer :turn=this.turn :render=render :click=handleClick>
+                </vc-button>
+            `,
 
         methods: {
             handleClick: function() {
-                if ( this.turn !== undefined ) {
+                if ( !this.isTurnCurrent() ) {
                     return;
                 }
                 engines.current.handleServe( this.eplayer );
             },
             render: function() {
-                return this.serve; // this.$store.getters.serve(this.eplayer, this.turn);
+                return this.serve;
             }
         },
 
         computed: {
 
             serve: function() {
+                //return Logic.renderServe();
                 let turn = this.turn || this.$store.getters.turn;
 			    if ( turn.serve.player !== this.eplayer ) {
 				    return "";

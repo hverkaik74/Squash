@@ -27,4 +27,17 @@ class Logic
         }
         return false;
     }
+
+    static isValidPlayerName( playerName ) {
+        if ( playerName === undefined ) {
+            return false;
+        }
+        if ( playerName === null ) {
+            return false;
+        }
+        if ( playerName === "" ) {
+            return false;
+        }
+        return true;
+    }
 }

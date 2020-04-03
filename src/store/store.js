@@ -8,6 +8,7 @@ Vue.use(Vuex);
  * All the names of possible mutations on the store instance.
  */
 enumMutations = Object.freeze ( {
+	bestOf: "bestOf",
 	games: "games",
 	historyAdd: "historyAdd",
 	info: "info",
@@ -48,6 +49,10 @@ const store = new Vuex.Store({
 	 * The 'getters' are a group of functions that expose values of the datamodel inside 'state'.
 	 */
 	getters: {
+
+		bestOf( state, getters ) {
+			return state.model.match.bestOf;
+		},
 
 		dialogs_undo( state, getters ) {
 			return state.model.dialogs.confirmUndo;
@@ -126,10 +131,11 @@ const store = new Vuex.Store({
 	
 		toss( state, getters ) 
 		{
-			if ( enumToss.isAutomatic( state.model.match.toss ) ) {
-				return true;
-			}
-			return false;
+			return state.model.match.toss;
+			//if ( enumToss.isAuto( state.model.match.toss ) ) {
+			//	return true;
+			//}
+			//return false;
 		},
 
 		turn: ( state, getters ) => {
@@ -146,6 +152,10 @@ const store = new Vuex.Store({
 	 */
 	mutations: {
 		
+		bestOf( state, value ) {
+			state.model.match.bestOf = value;
+		},
+
 		games( state, value ) {
 			if ( enumPlayer.isPlayerA( value.eplayer ) ) {
 				state.model.match.turn.scoreA.games = value.games;
@@ -175,7 +185,7 @@ const store = new Vuex.Store({
 			state.model.match.turn.scoreA.points = 0;
 			state.model.match.turn.scoreB.games = 0;
 			state.model.match.turn.scoreB.points = 0;
-			state.model.match.turn.serve.player = Par11.toss();
+			state.model.match.turn.serve.player = enumPlayer.toss( enumToss.Auto );
 			state.model.match.history.items.splice(0,state.model.match.history.items.length );
 		},
 
@@ -224,13 +234,14 @@ const store = new Vuex.Store({
 			state.model.match.turn.serve.side = eside;
 		},
 
-		toss( state, automatic )
+		toss( state, eToss )
 		{
-			if ( automatic ) {
-				state.model.match.toss = enumToss.Automatic;
-			} else {
-				state.model.match.toss = enumToss.Manual;
-			}
+			state.model.match.toss = eToss; 
+			//if ( automatic ) {
+			//	state.model.match.toss = enumToss.Automatic;
+			//} else {
+			//	state.model.match.toss = enumToss.Manual;
+			//}
 		},
 
 		undo( state, value ) {

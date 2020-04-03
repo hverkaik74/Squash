@@ -48,12 +48,12 @@ Vue.component(
                                     </v-row>
                                     <v-row>
                                         <v-col>
-                                            <v-select label="Best of X games" :items="bestof_items()" ></v-select>
+                                            <v-select v-model="bestOf" label="Best of X games" :items="bestOf_items()" ></v-select>
                                         </v-col>
                                     </v-row>
                                     <v-row>
                                         <v-col cols="12">
-                                            <v-switch v-model="toss" label=" Automatic toss."></v-switch>
+                                            <v-select v-model="toss" label="Toss" :items="toss_items()"></v-select>
                                         </v-col>
                                     </v-row>
                                 </v-container>
@@ -70,15 +70,47 @@ Vue.component(
             </div>`,
 
             methods: {
-                bestof_items()
+                bestOf_items()
                 {
                     return enumBestOf.all();
                 },
+
+                check() {
+                    // PlayerA:
+                    let playerA_name = this.$store.getters.player_name( enumPlayer.A );
+                    if ( !Logic.isValidPlayerName( playerA_name ) ) {
+                        return "Invalid player name.";
+                    }
+                    // Player B:
+                    let playerB_name = this.$store.getters.player_name( enumPlayer.B );
+                    if ( !Logic.isValidPlayerName( playerB_name ) ) {
+                        return "Invalid player name.";
+                    }
+                    // Player A & B:
+                    if ( playerA_name === playerB_name ) {
+                        return "Players must have different names.";
+                    }
+                    // BestOf:
+                    if ( this.$store.getters.bestOf === undefined ) {
+                        return "The 'Best of' setting must be selected.";
+                    }
+                    // Toss:
+                    if ( this.$store.getters.toss === undefined ) {
+                        return "The 'Toss' setting must be selected.";
+                    }
+                    return undefined;
+                },
+
                 handleClickCancel() {
                     this.hideDialog();
                 },
 
                 handleClickContinue() {
+                    let checkMessage = this.check();
+                    if ( checkMessage ) {
+                        alert( checkMessage ); //showCheck( checkMessage );
+                        return;
+                    }
                     this.hideDialog();
                     this.$store.commit( enumMutations.new_match, undefined );
                 },
@@ -97,10 +129,24 @@ Vue.component(
 
                 showStop() {
                     return !this.showStart();
+                },
+
+                toss_items() {
+                    return enumToss.all();
                 }
             },
 
             computed: {
+
+                bestOf:
+                    {
+                        get() {
+                            return this.$store.getters.bestOf;
+                        },
+                        set( value ) {
+                            this.$store.commit( enumMutations.bestOf, value );
+                        }
+                    },
 
                 namePlayerA: {
                      get() {

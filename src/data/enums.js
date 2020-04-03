@@ -26,6 +26,24 @@ enumPlayer = Object.freeze ( {
         return this.isPlayerA( eplayer ) ? this.B : this.A;
     },
 
+	toss: function( eToss )
+	{
+        switch ( eToss ) {
+            case enumToss.Auto:
+                let random01 = ( Math.random() > 0.5 ) ? 1 : 0;
+                if ( random01 === 0 ) {
+                    return enumPlayer.A;
+                }
+                return enumPlayer.B;
+            case enumToss.A:
+                return enumPlayer.A;
+            case enumToss.B:
+                return enumPlayer.B;
+            default:
+                Exceptions.throw( eToss );
+        }
+	}
+
 } );
 
 /**
@@ -69,12 +87,17 @@ enumMatchState = Object.freeze( {
 
 enumToss = Object.freeze( {
 
-    Automatic: "Auto",
-    Manual: "Manual",
+    Auto: "Auto",
+    A: enumPlayer.A,
+    B: enumPlayer.B,
 
-    isAutomatic: function( enumToss ) 
+    all: function() {
+        return [this.Auto, this.A, this.B];
+    },
+
+    isAuto: function( enumToss ) 
     {
-        if ( enumToss === this.Automatic ) {
+        if ( enumToss === this.Auto ) {
             return true;
         }
         return false;
@@ -99,6 +122,8 @@ enumBestOf = Object.freeze( {
                 return 2;
             case enumBestOf.Five:
                 return 3;
+            default:
+                return 0; //Exceptions.throw( eBestOf );
         }
     }
 

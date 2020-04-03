@@ -2,6 +2,7 @@
 // vc-players.js
 //
 
+
 Vue.component(
     'vc-players', 
     {

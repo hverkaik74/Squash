@@ -14,6 +14,8 @@ Vue.component(
     {
         props: ['eplayer','turn', 'render', 'click'],
 
+        mixins: [mixinAll],
+
         template: `<v-btn class="vc-button v-btn--depressed"
         
         :disabled="!isMatchRunning()"
@@ -35,9 +37,9 @@ Vue.component(
                     this.click();
                 }
             },
-            isMatchRunning: function() {
-                return Logic.isMatchRunning( this.$store.state.model.match );
-            },
+            //isMatchRunning: function() {
+            //    return Logic.isMatchRunning( this.$store.state.model.match );
+            //},
             isTurnCurrent: function() {
                 return this.turn === undefined;
             },

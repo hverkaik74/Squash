@@ -33,6 +33,9 @@
     </body> 
 </html> 
 
+<!-- Reference to all library code. -->
+<script src="./src/lib/exceptions.js"></script>
+
 <!-- Reference to all the the data classes. -->
 <script src="./src/data/enums.js"></script>
 <script src="./src/data/player.js"></script>
@@ -66,6 +69,9 @@
 <script src="./src/engines/par11/par11.js"></script>
 <script src="./src/engines/engines.js" ></script>
 
+<!-- Reference to miximAll. Must be referenced before the components. -->
+<script src="./src/components/mixinAll.js"></script>
+
 <!-- Reference to vue components. -->
 <script src="./src/components/vc-space.js"></script>
 <script src="./src/components/vc-button.js"></script>
@@ -86,8 +92,16 @@
 <script src="./main.js"></script> 
 
 <script>
+
     // strict mode enabled.    
     "use strict";
+
+    // Catch unhandled errors. This will not catch all errors: https://stackoverflow.com/questions/12571650/catching-all-javascript-unhandled-exceptions 
+    window.onerror = function myErrorHandler(errorMsg, url, lineNumber) {
+        alert("Error occured: " + errorMsg);//or any message
+        return false;
+    }
+
 
     // This is executed after page is loaded.    
     document.addEventListener("DOMContentLoaded", function(event) {

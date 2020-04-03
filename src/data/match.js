@@ -16,11 +16,11 @@ class Match
         this._history = new History();
     }
 
-    get() {
+    get bestOf() {
         return this._bestOf;
     }
 
-    set( enumBestOf ) 
+    set bestOf( enumBestOf ) 
     {
         this._bestOf = enumBestOf;
     }

@@ -12,11 +12,13 @@ class Main {
 
     start()
     {
+
         const App = new Vue({
             el: '#app',
             vuetify: new Vuetify(),
-            store
-        })                  
+            store,
+        });
+
         engines.current = par11;        
     }
 }

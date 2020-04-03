@@ -13,7 +13,7 @@ class Par11 {
 		// todo: do were really want the store here?
 		this._store = store;
 
-		this._bestOf = enumBestOf.gamesToWin( this._store.getters.model.match.bestOf )
+		this._bestOf = enumBestOf.gamesToWin( this._store.getters.bestOf )
 
 	}
 
@@ -115,6 +115,7 @@ class Par11 {
 		return enumSide.opposite( previousTurn.serve.side );
 	}
 
+	/*
 	static toss()
 	{
 		let random01 = ( Math.random() > 0.5 ) ? 1 : 0;
@@ -123,7 +124,8 @@ class Par11 {
 		}
 		return enumPlayer.B;
 	}
-
+    */
+   
 	handleScore( eplayer ) 
 	{
 		// We make a copy of the current turn to add this to the history of the match.

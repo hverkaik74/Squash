@@ -38,21 +38,6 @@ Vue.component(
             `,
 
             methods: {
-                /*
-                isServing: function( eplayer )
-                {
-                    let turn = this.turn || this.$store.getters.turn;
-                    if ( turn.serve.player === eplayer ) {
-                        return true;
-                    }
-                    return false;
-                },
-                */
-
-                //isTurnCurrent: function() {
-                //    return this.mixins["mixinTurn"].isTurnCurrent();
-                //},
-
                 isTurnWinner: function() {
                     // todo ... 
                 }

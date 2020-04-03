@@ -30,7 +30,6 @@ Vue.component(
         computed: {
 
             serve: function() {
-                //return Logic.renderServe();
                 let turn = this.turn || this.$store.getters.turn;
 			    if ( turn.serve.player !== this.eplayer ) {
 				    return "";

@@ -2,9 +2,6 @@
 // enums.js
 //
 
-/**
- * 
- */
 enumPlayer = Object.freeze ( {
     
     A: "A",
@@ -14,16 +11,16 @@ enumPlayer = Object.freeze ( {
         return [this.A, this.B];
     },
 
-    isPlayerA: function( eplayer ) {
-        return eplayer === this.A;
+    isPlayerA: function( ePlayer ) {
+        return ePlayer === this.A;
     },
 
-    isPlayerB: function( eplayer ) {
-        return eplayer === this.B;
+    isPlayerB: function( ePlayer ) {
+        return ePlayer === this.B;
     },
 
-    opponent: function( eplayer ) {
-        return this.isPlayerA( eplayer ) ? this.B : this.A;
+    opponent: function( ePlayer ) {
+        return this.isPlayerA( ePlayer ) ? this.B : this.A;
     },
 
 	toss: function( eToss )
@@ -46,9 +43,6 @@ enumPlayer = Object.freeze ( {
 
 } );
 
-/**
- * 
- */
 enumSide = Object.freeze( {
 
     L: "L",
@@ -58,8 +52,8 @@ enumSide = Object.freeze( {
         return [this.L, this.R];
     },
 
-    opposite: function( eside ) {
-        return eside == this.L ? this.R : this.L;
+    opposite: function( eSide ) {
+        return eSide == this.L ? this.R : this.L;
     }
 } );
 
@@ -95,9 +89,9 @@ enumToss = Object.freeze( {
         return [this.Auto, this.A, this.B];
     },
 
-    isAuto: function( enumToss ) 
+    isAuto: function( eToss ) 
     {
-        if ( enumToss === this.Auto ) {
+        if ( eToss === this.Auto ) {
             return true;
         }
         return false;
@@ -123,8 +117,7 @@ enumBestOf = Object.freeze( {
             case enumBestOf.Five:
                 return 3;
             default:
-                return 0; //Exceptions.throw( eBestOf );
+                return 0;
         }
     }
-
 } ); 

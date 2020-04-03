@@ -5,8 +5,8 @@
 class Serve
 {
     constructor() {
-        this._eplayer = enumPlayer.A;
-        this._eside = enumSide.L;
+        this._ePlayer = enumPlayer.A;
+        this._eSide = enumSide.L;
         this._maySwitch = true;        
     }
 
@@ -26,23 +26,23 @@ class Serve
     }
 
     get player() {
-        return this._eplayer;
+        return this._ePlayer;
     }
 
     get side() {
-        return this._eside;
+        return this._eSide;
     }
 
     get maySwitch() {
         return this._maySwitch;
     }
 
-    set player( eplayer ) {
-        this._eplayer = eplayer;
+    set player( ePlayer ) {
+        this._ePlayer = ePlayer;
     }
 
-    set side( eside ) {
-        this._eside = eside;
+    set side( eSide ) {
+        this._eSide = eSide;
     }
 
     set maySwitch( maySwitch ) {

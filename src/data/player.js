@@ -4,14 +4,14 @@
 
 class Player
 {
-    constructor( eplayer ) 
+    constructor( ePlayer ) 
     {
-        this._eplayer = eplayer;
-        this._name = eplayer.toString();
+        this._ePlayer = ePlayer;
+        this._name = ePlayer.toString();
     }
 
     get eplayer() {
-      return this._eplayer;
+      return this._ePlayer;
     }
 
     get name() {

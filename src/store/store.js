@@ -10,6 +10,7 @@ Vue.use(Vuex);
 enumMutations = Object.freeze ( {
 	bestOf: "bestOf",
 	games: "games",
+	history: "history",
 	historyAdd: "historyAdd",
 	info: "info",
 	match_state: "match_state",
@@ -28,6 +29,7 @@ enumMutations = Object.freeze ( {
 } );
 
 enumActions = Object.freeze( {
+	start_new_match: "start_new_match",
 	undo: "undo",
 } );
 
@@ -132,10 +134,6 @@ const store = new Vuex.Store({
 		toss( state, getters ) 
 		{
 			return state.model.match.toss;
-			//if ( enumToss.isAuto( state.model.match.toss ) ) {
-			//	return true;
-			//}
-			//return false;
 		},
 
 		turn: ( state, getters ) => {
@@ -164,6 +162,15 @@ const store = new Vuex.Store({
 			}
 		},
 
+		history( state, value ) {
+
+			if ( value === undefined ) {
+				state.model.match.history.items.splice(0,state.model.match.history.items.length );
+				return;
+			}
+
+		},
+
 		historyAdd( state, turn )
 		{
 			let historyTurn = state.model.match.turn.copy();
@@ -179,6 +186,7 @@ const store = new Vuex.Store({
 			state.model.match.state = enumMatchState;
 		},
 
+		/*
 		new_match( state ) {
 			state.model.match.state = enumMatchState.Running;
 			state.model.match.turn.scoreA.games = 0;
@@ -188,6 +196,7 @@ const store = new Vuex.Store({
 			state.model.match.turn.serve.player = enumPlayer.toss( enumToss.Auto );
 			state.model.match.history.items.splice(0,state.model.match.history.items.length );
 		},
+		*/
 
 		player_name( state, value ) {
             if ( enumPlayer.isPlayerA( value.eplayer ) ) {
@@ -237,11 +246,6 @@ const store = new Vuex.Store({
 		toss( state, eToss )
 		{
 			state.model.match.toss = eToss; 
-			//if ( automatic ) {
-			//	state.model.match.toss = enumToss.Automatic;
-			//} else {
-			//	state.model.match.toss = enumToss.Manual;
-			//}
 		},
 
 		undo( state, value ) {
@@ -251,6 +255,23 @@ const store = new Vuex.Store({
 	},
 
 	actions: {
+
+		start_new_match( context ) {
+
+			context.commit( enumMutations.match_state, enumMatchState.Running ); 
+			
+			context.commit( enumMutations.games, { player: enumPlayer.A, games: 0 } );
+			context.commit( enumMutations.points, { player: enumPlayer.A, points: 0 } );
+			
+			context.commit( enumMutations.games, { player: enumPlayer.B, games: 0 } );
+			context.commit( enumMutations.points, { player: enumPlayer.B, points: 0 } );
+			
+			let toss = context.getters.toss;
+			let serve_player = enumPlayer.toss( toss );
+			context.commit( enumMutations.serve_player, serve_player );
+
+			context.commit( enumMutations.history, undefined );
+		},
 
 		undo ( context ) {
 			

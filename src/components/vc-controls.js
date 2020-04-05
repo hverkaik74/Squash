@@ -109,11 +109,12 @@ Vue.component(
                 handleClickContinue() {
                     let checkMessage = this.check();
                     if ( checkMessage ) {
-                        alert( checkMessage ); //showCheck( checkMessage );
+                        alert( checkMessage ); // todo: dont use an alert, but a new dialog?
                         return;
                     }
                     this.hideDialog();
-                    this.$store.commit( enumMutations.new_match, undefined );
+                    //this.$store.commit( enumMutations.new_match, undefined );
+                    this.$store.dispatch( enumActions.start_new_match );
                 },
 
                 handleClickStopMatch() {
